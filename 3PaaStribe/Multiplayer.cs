@@ -18,7 +18,8 @@ namespace _3PaaStribe
             player2.playerTurn = false;
             do
             {
-                //Player 1 turn
+//rewrite this to to turn, but goes for both players.
+//Player 1 turn
                 if (player.GetPlayerTurn())
                 {
                     Type(STRplayerone);
@@ -36,7 +37,7 @@ namespace _3PaaStribe
                     player2.playerTurn = true;
 
                 }
-                //Player 2 turn
+ //Player 2 turn
                 if (player2.GetPlayerTurn())
                 {
                     Type(STRplayertwo);

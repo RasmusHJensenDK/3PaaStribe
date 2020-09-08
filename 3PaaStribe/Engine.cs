@@ -117,7 +117,7 @@ namespace _3PaaStribe
             
             } while (!finish);
         }
-
+//Singleplayer start game
         public static void SinglePlayer(Player player, Player bot, Board board)
         {
             Ai ai = new Ai();
