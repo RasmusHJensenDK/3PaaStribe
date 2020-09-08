@@ -5,12 +5,18 @@ namespace _3PaaStribe
 {
     public class Ai: Strings
     {
-        int moveTo;
+        static int moveTo;
 
-        public Ai(Player player, Player bot)
+        private static bool isGameFinished { get; set; }
+
+        public Ai()
+        {
+            
+        }
+
+        public void Run(Player player, Player bot, Board board)
         {
             Console.Clear();
-            Board board = new Board();
             Random random = new Random();
             player.playerTurn = true;
 
@@ -20,6 +26,7 @@ namespace _3PaaStribe
 
                 if (player.GetPlayerTurn())
                 {
+                    Type(STRplayerone);
                     moveTo = Convert.ToInt32(Console.ReadLine());
 
                     while (board.CheckValue(moveTo))
@@ -31,7 +38,8 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
-
+                        Type(player.GetPlayerName() + STRwin);
+                        isGameFinished = true;
                     }
                     player.playerTurn = false;
                 }
@@ -52,23 +60,8 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
-                        Type(player.GetPlayerName() + STRwin);
-                        Type("Do you want to play again? Y / N");
-                        playAgain = Console.ReadKey().KeyChar;
-
-                        switch (playAgain)
-                        {
-                            case 'Y':
-                                board.ResetBoard();
-                                Type(moveTo.ToString());
-                                SinglePlayer(player, bot);
-                                break;
-                            case 'N':
-                                Type(STRthanksforplaying);
-                                Thread.Sleep(500);
-                                Environment.Exit(0);
-                                break;
-                        }
+                        Type(bot.GetPlayerName() + STRwin);
+                        isGameFinished = true;
 
                     }
                     player.playerTurn = true;
@@ -76,26 +69,20 @@ namespace _3PaaStribe
 
 
             } while (!isGameFinished);
-            Type(STRplayagain);
-            playAgainInput = Console.ReadKey().KeyChar;
-            if (playAgainInput == 'Y')
-            {
-                Type(STRsingleormulti);
-                choose = Console.ReadKey().KeyChar;
-
-                switch (choose)
-                {
-                    case 'S':
-                        SinglePlayer(player, bot);
-                        break;
-                    case 'M':
-                        //Multiplayer(player, player2);
-                        break;
-                    default: break;
-                }
-            }
         }
 
+        public bool IsGameFinished()
+        {
+            return isGameFinished;
+        }
 
+        public void SetGameFinish()
+        {
+            isGameFinished = true;
+        }
     }
 }
+
+
+
+  

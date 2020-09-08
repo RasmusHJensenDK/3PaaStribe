@@ -8,16 +8,15 @@ namespace _3PaaStribe
     class Engine: Strings
     {
         //User input variables.
+        #region
         static char botPiece;
-        static bool isGameFinished;
         static char gameMode;
         static char piece;
         static char multiplayerPiece;
         static char multiplayer2Piece;
-        static char playAgain;
-        static char playAgainInput;
-        static char choose;
-        static int moveTo;
+        static bool finish = true;
+        #endregion
+
         public Engine()
         {
             Type("Starting game..");
@@ -32,7 +31,7 @@ namespace _3PaaStribe
 
             switch (gameMode)
             {
-                //Singleplayer
+//Singleplayer
                 case 'S':
                     TypeMulti(ARRwelcomesingle);
                     piece = Console.ReadKey().KeyChar;
@@ -41,7 +40,7 @@ namespace _3PaaStribe
                     botPiece = CHRpieceX;
                     Player singlePlayer = new Player(STRplayerone, Convert.ToInt32(piece));
 
-                    //Sets bots piece from users choice -1.
+
                     if (singlePlayer.GetPlayerPiece() == CHRpieceX)
                     {
                         botPiece = CHRpieceO;
@@ -50,7 +49,7 @@ namespace _3PaaStribe
                     Player bot = new Player(STRbot, botPiece);
                     SinglePlayer(singlePlayer, bot);
                     break;
-                //Multiplayer
+//Multiplayer
                 case 'M':
                     TypeMulti(ARRwelcomemulti);
                     multiplayerPiece = Console.ReadKey().KeyChar;
@@ -70,186 +69,38 @@ namespace _3PaaStribe
             }
             Console.ReadKey();
         }
-        //Multiplayer start game
+
+//Multiplayer start game
         public static void Multiplayer(Player player, Player player2)
         {
-            Console.Clear();
+            Multiplayer multiplayer = new Multiplayer();
             Board board = new Board();
-            board.DrawBoard();
-            player.playerTurn = true;
-            player2.playerTurn = false;
             do
             {
-//Player 1 turn
-                if (player.GetPlayerTurn())
+                multiplayer.Run(player, player2, board);
+
+                if (multiplayer.IsGameFinished())
                 {
-                    Type(STRplaceyourpiece + player.GetPlayerName());
-                    int moveTo = Convert.ToInt32(Console.ReadLine());
-                    board.MovePiece(moveTo, player, board);
-                    if (board.CheckForWin())
-                    {
-                        Type(player.GetPlayerName() + STRwin);
-                        Type(STRplayagain);
-                        playAgain = Console.ReadKey().KeyChar;
-                        isGameFinished = true;
-                        switch (playAgain)
-                        {
-                            case 'Y':
-                                board.ResetBoard();
-                                Multiplayer(player, player2);
-                                break;
-                            case 'N':
-                                Console.WriteLine(STRthanksforplaying);
-                                break;
-                        }
-
-                    }
-                    player.playerTurn = false;
-                    player2.playerTurn = true;
-
+                    multiplayer.SetGameFinish();
+                    finish = false;
                 }
-//Player 2 turn
-                if (player2.GetPlayerTurn())
-                {
-                    Type(STRplaceyourpiece + player2.GetPlayerName());
-                    moveTo = Convert.ToInt32(Console.ReadLine());
-                    board.MovePiece(moveTo, player2, board);
-                    if (board.CheckForWin())
-                    {
-                        Type(player.GetPlayerName() + STRwin);
-                        Type(STRplayagain);
-                        playAgain = Console.ReadKey().KeyChar;
-                        isGameFinished = true;
-                        switch (playAgain)
-                        {
-                            case 'Y':
-                                board.ResetBoard();
-                                Multiplayer(player, player2);
-                                break;
-                            case 'N':
-                                Type(STRthanksforplaying);
-                                break;
-                        }
-
-                    }
-                    player2.playerTurn = false;
-                    player.playerTurn = true;
-                }
-                /*
-                if (win)
-                {
-                    Type(STRcongratulations  + WinningPlayer);
-                    isGameFinished = true;
-                }
-                */
-            } while (!isGameFinished);
-
+            } while (!finish);
         }
+
         public static void SinglePlayer(Player player, Player bot)
         {
-            Console.Clear();
+            Ai ai = new Ai();
             Board board = new Board();
-            Random random = new Random();
-            player.playerTurn = true;
-
             do
             {
-                board.DrawBoard();
+                ai.Run(player, bot, board);
 
-                if (player.GetPlayerTurn())
+                if (ai.IsGameFinished())
                 {
-                    Type(player.GetPlayerName() + STRpleacemoveapiece);
-                    int moveTo = Convert.ToInt32(Console.ReadLine());
-
-                    while (board.CheckValue(moveTo))
-                    {
-                        Type(STRallreadythere);
-                        moveTo = Convert.ToInt32(Console.ReadLine());
-                    }
-
-                    board.MovePiece(moveTo, player, board);
-
-                    if (board.CheckForWin())
-                    {
-                        Type(player.GetPlayerName() + STRwin);
-                        Type(STRplayagain);
-                        playAgain = Console.ReadKey().KeyChar;
-
-                        switch (playAgain)
-                        {
-                            case 'Y':
-                                board.ResetBoard();
-                                SinglePlayer(player, bot);
-                                break;
-                            case 'N':
-                                Console.WriteLine(STRthanksforplaying);
-                                Thread.Sleep(500);
-                                Environment.Exit(0);
-                                break;
-                        }
-
-                    }
-                    player.playerTurn = false;
+                    ai.SetGameFinish();
+                    finish = false;
                 }
-
-                if (!player.GetPlayerTurn())
-                {
-                    Type("Bot is thinking...");
-                    Thread.Sleep(400);
-                    moveTo = random.Next(1, 8);
-                    while (board.CheckValue(moveTo))
-                    {
-                        Type("Bot chose a spot allready there.. thinking again..");
-                        moveTo = random.Next(1, 8);
-                    }
-                    Type(moveTo.ToString());
-
-                    board.MovePiece(moveTo, bot, board);
-
-                    if (board.CheckForWin())
-                    {
-                        Type(player.GetPlayerName() + STRwin);
-                        Type("Do you want to play again? Y / N");
-                        playAgain = Console.ReadKey().KeyChar;
-
-                        switch (playAgain)
-                        {
-                            case 'Y':
-                                board.ResetBoard();
-                                Type(moveTo.ToString());
-                                SinglePlayer(player, bot);
-                                break;
-                            case 'N':
-                                Type(STRthanksforplaying);
-                                Thread.Sleep(500);
-                                Environment.Exit(0);
-                                break;
-                        }
-
-                    }
-                    player.playerTurn = true;
-                }
-
-
-            } while (!isGameFinished);
-            Type(STRplayagain);
-            playAgainInput = Console.ReadKey().KeyChar;
-            if (playAgainInput == 'Y')
-            {
-                Type(STRsingleormulti);
-                choose = Console.ReadKey().KeyChar;
-
-                switch (choose)
-                {
-                    case 'S':
-                        SinglePlayer(player, bot);
-                        break;
-                    case 'M':
-                        //Multiplayer(player, player2);
-                        break;
-                    default: break;
-                }
-            }
+            } while (!finish);
         }
     }
 }

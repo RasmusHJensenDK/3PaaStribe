@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _3PaaStribe
 {
-    class Strings
+    public class Strings
     {
         public static string STRwelcometothirdonarow = "Hello! - Welcome to 3 on a line";
         public static string STRsingleormulti = "(S)ingle or (M)ultiplayer?";

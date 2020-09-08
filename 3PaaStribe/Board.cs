@@ -5,7 +5,7 @@ using System.Text;
 namespace _3PaaStribe
 {
 
-    class Board
+    public class Board
     {
         private static int[] arrBoard = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
         private static int countPieces = 0;

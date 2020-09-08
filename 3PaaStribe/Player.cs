@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _3PaaStribe
 {
-    class Player
+    public class Player
     {
         public bool playerTurn { get; set; }
         private string playerName { get; set; }
