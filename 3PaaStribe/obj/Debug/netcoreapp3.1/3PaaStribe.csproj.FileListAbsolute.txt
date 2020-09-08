@@ -1,0 +1,13 @@
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.exe
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.deps.json
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.runtimeconfig.json
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.runtimeconfig.dev.json
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.dll
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\bin\Debug\netcoreapp3.1\3PaaStribe.pdb
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.csprojAssemblyReference.cache
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.AssemblyInfoInputs.cache
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.AssemblyInfo.cs
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.csproj.CoreCompileInputs.cache
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.dll
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.pdb
+C:\Users\c98101rhj\OneDrive - Ejner Hessel A S\Desktop\Skole H1\OOP\OOP\3PaaStribe\3PaaStribe\obj\Debug\netcoreapp3.1\3PaaStribe.genruntimeconfig.cache

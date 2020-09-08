@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "3PaaStribe/1.0.0": {
+        "runtime": {
+          "3PaaStribe.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "3PaaStribe/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
