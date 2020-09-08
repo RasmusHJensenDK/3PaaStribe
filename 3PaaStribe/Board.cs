@@ -101,8 +101,6 @@ namespace _3PaaStribe
             {
                 return true;
             }
-
-
             return false;
         }
 

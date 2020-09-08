@@ -3,9 +3,9 @@ namespace _3PaaStribe
 {
     public class Multiplayer: Strings
     {
-        static bool isGameFinished { get; set; }
-        static int moveTo;
-
+        private static bool isGameFinished { get; set; }
+        private static int moveTo;
+        private static string winningPlayer { get; set; }
         public Multiplayer()
         {
         }
@@ -27,7 +27,7 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
-
+                        winningPlayer = player.GetPlayerName();
                         isGameFinished = true;
                         break;
                     }
@@ -45,6 +45,7 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
+                        winningPlayer = player2.GetPlayerName();
                         isGameFinished = true;
                         break;
                     }
@@ -63,6 +64,11 @@ namespace _3PaaStribe
         public void SetGameFinish()
         {
             isGameFinished = true;
+        }
+
+        public string WinningPlayer()
+        {
+            return winningPlayer;
         }
     }
 }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Linq;
 
 namespace _3PaaStribe
 {
     class Engine: Strings
     {
-        //User input variables.
+        //User input variables. Get rids of theese somehow..
         #region
         static char botPiece;
         static char gameMode;
@@ -15,6 +16,8 @@ namespace _3PaaStribe
         static char multiplayerPiece;
         static char multiplayer2Piece;
         static bool finish = true;
+        private static char[] playerPieces = { 'X', 'O' };
+        private static char[] gamemodes = { 'S', 'M' };
         #endregion
 
         public Engine()
@@ -27,7 +30,17 @@ namespace _3PaaStribe
         public void EngineRun()
         {
             TypeMulti(ARRbuilderwelcome);
+            Board board = new Board();
             gameMode = Console.ReadKey().KeyChar;
+            Boolean gamemode = gamemodes.Contains(gameMode);
+
+            while(!gamemode)
+            {
+                Type("Mode has to S or M");
+                Type("Remember the uppercase!!");
+                gameMode = Console.ReadKey().KeyChar;
+                gamemode = gamemodes.Contains(gameMode);
+            }
 
             switch (gameMode)
             {
@@ -37,9 +50,17 @@ namespace _3PaaStribe
                     piece = Console.ReadKey().KeyChar;
                     Type("");
 
+                    Boolean exist = playerPieces.Contains(piece);
+                    while (!exist)
+                    {
+                        Type("Piece has to X or O");
+                        Type("Remember the uppercase!!");
+                        piece = Console.ReadKey().KeyChar;
+                        exist = playerPieces.Contains(piece);
+                    }
+
                     botPiece = CHRpieceX;
                     Player singlePlayer = new Player(STRplayerone, Convert.ToInt32(piece));
-
 
                     if (singlePlayer.GetPlayerPiece() == CHRpieceX)
                     {
@@ -47,7 +68,10 @@ namespace _3PaaStribe
                     }
 
                     Player bot = new Player(STRbot, botPiece);
-                    SinglePlayer(singlePlayer, bot);
+                    SinglePlayer(singlePlayer, bot, board);
+
+                    Type("Congratulations .name/ ");
+
                     break;
 //Multiplayer
                 case 'M':
@@ -55,6 +79,7 @@ namespace _3PaaStribe
                     multiplayerPiece = Console.ReadKey().KeyChar;
                     Type("");
                     Player playerone = new Player(STRplayerone, Convert.ToInt32(multiplayerPiece));
+
                     if (multiplayerPiece == CHRpieceX)
                     {
                         multiplayer2Piece = CHRpieceO;
@@ -63,18 +88,21 @@ namespace _3PaaStribe
                     {
                         multiplayer2Piece = CHRpieceX;
                     }
+
                     Player playerTwo = new Player(STRplayertwo, multiplayer2Piece);
-                    Multiplayer(playerone, playerTwo);
+                    Multiplayer(playerone, playerTwo, board);
+                    Console.Clear();
+                    Type("Congratulations .name/ ");
+
                     break;
             }
             Console.ReadKey();
         }
 
 //Multiplayer start game
-        public static void Multiplayer(Player player, Player player2)
+        public static void Multiplayer(Player player, Player player2, Board board)
         {
             Multiplayer multiplayer = new Multiplayer();
-            Board board = new Board();
             do
             {
                 multiplayer.Run(player, player2, board);
@@ -82,15 +110,17 @@ namespace _3PaaStribe
                 if (multiplayer.IsGameFinished())
                 {
                     multiplayer.SetGameFinish();
-                    finish = false;
+                    finish = true;
+                    //Set winner instead of this..
+                    Type("The winner is .. " + multiplayer.WinningPlayer());
                 }
+            
             } while (!finish);
         }
 
-        public static void SinglePlayer(Player player, Player bot)
+        public static void SinglePlayer(Player player, Player bot, Board board)
         {
             Ai ai = new Ai();
-            Board board = new Board();
             do
             {
                 ai.Run(player, bot, board);
@@ -98,7 +128,10 @@ namespace _3PaaStribe
                 if (ai.IsGameFinished())
                 {
                     ai.SetGameFinish();
-                    finish = false;
+                    finish = true;
+
+                    //Set winner instead of this..
+                    Type("The winner is .. " + ai.WinningPlayer());
                 }
             } while (!finish);
         }

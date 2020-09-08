@@ -8,12 +8,12 @@ namespace _3PaaStribe
         static int moveTo;
 
         private static bool isGameFinished { get; set; }
+        private static string winningPlayer { get; set; }
 
         public Ai()
         {
             
         }
-
         public void Run(Player player, Player bot, Board board)
         {
             Console.Clear();
@@ -24,7 +24,7 @@ namespace _3PaaStribe
             {
                 board.DrawBoard();
 
-                if (player.GetPlayerTurn())
+                while (player.GetPlayerTurn())
                 {
                     Type(STRplayerone);
                     moveTo = Convert.ToInt32(Console.ReadLine());
@@ -40,11 +40,13 @@ namespace _3PaaStribe
                     {
                         Type(player.GetPlayerName() + STRwin);
                         isGameFinished = true;
+                        winningPlayer = player.GetPlayerName();
+                        break;
                     }
                     player.playerTurn = false;
                 }
 
-                if (!player.GetPlayerTurn())
+                while (!player.GetPlayerTurn())
                 {
                     Type("Bot is thinking...");
                     Thread.Sleep(400);
@@ -62,6 +64,8 @@ namespace _3PaaStribe
                     {
                         Type(bot.GetPlayerName() + STRwin);
                         isGameFinished = true;
+                        winningPlayer = bot.GetPlayerName();
+                        break;
 
                     }
                     player.playerTurn = true;
@@ -79,6 +83,11 @@ namespace _3PaaStribe
         public void SetGameFinish()
         {
             isGameFinished = true;
+        }
+
+        public string WinningPlayer()
+        {
+            return winningPlayer;
         }
     }
 }
