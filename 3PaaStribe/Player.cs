@@ -9,12 +9,12 @@ namespace _3PaaStribe
     {
         public bool playerTurn { get; set; }
         private string playerName { get; set; }
-        private char playerPiece { get; set; }
-        private char botPiece { get; set; }
+        private string playerPiece { get; set; }
+        private string botPiece { get; set; }
 
-        private static char[] playerPieces = { 'X', 'O' };
+        private static string[] playerPieces = { "X", "O" };
 
-        public Player(string playerName, char playerPiece, bool playerTurn = true)
+        public Player(string playerName, string playerPiece, bool playerTurn = true)
         {
             this.playerName = playerName;
             this.playerTurn = playerTurn;
@@ -31,30 +31,30 @@ namespace _3PaaStribe
             return playerTurn;
         }
 
-        public int GetPlayerPiece()
+        public string GetPlayerPiece()
         {
             return playerPiece;
         }
 
-        public void SetPlayerPiece(char t)
+        public void SetPlayerPiece(string t)
         {
-            this.playerPiece = playerPieces[t];
+            this.playerPiece = playerPieces[Convert.ToInt32(t)];
         }
 
-        public char SetPiece()
+        public string SetPiece()
         {
-            if (GetPlayerPiece() == 'X')
+            if (GetPlayerPiece() == "X")
             {
-                botPiece = 'O';
+                botPiece = "O";
             }
             else
             {
-                botPiece = 'X';
+                botPiece = "X";
             }
             return botPiece;
         }
 
-        public bool PlayerPieces(char t)
+        public bool PlayerPieces(string t)
         {
             if(playerPieces.Contains(t))
             {

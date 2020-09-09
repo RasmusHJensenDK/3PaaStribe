@@ -11,9 +11,9 @@ namespace _3PaaStribe
         //User input variables. Get rids of theese somehow..
         #region
         static char gameMode;
-        static char piece = 'X';
+        static string piece = "X";
         static bool finish = true;
-        static char multiplayerPiece;
+        static string multiplayerPiece;
         private static char[] gamemodes = { 'S', 'M' };
         #endregion
 
@@ -28,7 +28,7 @@ namespace _3PaaStribe
         {
             TypeMulti(ARRbuilderwelcome);
             Board board = new Board();
-            Player player = new Player("Player", 'X');
+            Player player = new Player("Player", "X");
             gameMode = Console.ReadKey().KeyChar;
             Boolean gamemode = gamemodes.Contains(gameMode);
 
@@ -45,14 +45,14 @@ namespace _3PaaStribe
 //Singleplayer
                 case 'S':
                     TypeMulti(ARRwelcomesingle);
-                    piece = Console.ReadKey().KeyChar;
+                    piece = Console.ReadLine();
                     Type("");
 
                     while (!player.PlayerPieces(piece))
                     {
                         Type("Piece has to X or O");
                         Type("Remember the uppercase!!");
-                        piece = Console.ReadKey().KeyChar;
+                        piece = Console.ReadLine();
                     }
 
                     Player singlePlayer = new Player(STRplayerone, piece);
@@ -66,7 +66,7 @@ namespace _3PaaStribe
 //Multiplayer
                 case 'M':
                     TypeMulti(ARRwelcomemulti);
-                    multiplayerPiece = Console.ReadKey().KeyChar;
+                    multiplayerPiece = Console.ReadLine();
                     Type("");
                     Player playerone = new Player(STRplayerone, multiplayerPiece);
                     Player playerTwo = new Player(STRplayertwo, playerone.SetPiece());
