@@ -7,26 +7,35 @@ namespace _3PaaStribe
 
     public class Board
     {
-        private static int[] arrBoard = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-        private static int countPieces = 0;
+        private Boardpiece[] boardpieces;
 
         public Board()
         {
         }
         public void DrawBoard()
         {
+            this.boardpieces = new Boardpiece[9];
+            int taeller = 0;
+
+            foreach (boardpieces bp in Enum.GetValues(typeof(boardpieces)))
+            {
+                Boardpiece boardpiece = new Boardpiece();
+                boardpieces[taeller] = boardpiece;
+                taeller++;
+            }
+
             Console.Clear();
             Console.WriteLine("  -------------------------");
             Console.WriteLine("  |       |       |       |");
-            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", arrBoard[0], arrBoard[1], arrBoard[2]);
+            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", boardpieces[0].GetBoardPiece().ToString(), boardpieces[1].GetBoardPiece().ToString(), boardpieces[2].GetBoardPiece().ToString());
             Console.WriteLine("  |       |       |       |");
             Console.WriteLine("  -------------------------");
             Console.WriteLine("  |       |       |       |");
-            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", arrBoard[3], arrBoard[4], arrBoard[5]);
+            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", boardpieces[3].GetBoardPiece().ToString(), boardpieces[4].GetBoardPiece().ToString(), boardpieces[5].GetBoardPiece().ToString());
             Console.WriteLine("  |       |       |       |");
             Console.WriteLine("  -------------------------");
             Console.WriteLine("  |       |       |       |");
-            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", arrBoard[6], arrBoard[7], arrBoard[8]);
+            Console.WriteLine("  |   {0}   |   {1}   |   {2}   |", boardpieces[6].GetBoardPiece().ToString(), boardpieces[7].GetBoardPiece().ToString(), boardpieces[8].GetBoardPiece().ToString());
             Console.WriteLine("  |       |       |       |");
             Console.WriteLine("  -------------------------");
         }
@@ -34,71 +43,58 @@ namespace _3PaaStribe
         public void MovePiece(int move, Player player, Player second, Board board)
         {
             Console.Clear();
-            arrBoard[move] = player.GetPlayerPiece();
+            Boardpiece boardpiece = new Boardpiece(player);
+            boardpieces[move] = boardpiece;
             player.playerTurn = !second.playerTurn;
             second.playerTurn = !player.playerTurn;
-            countPieces++;
             DrawBoard();
         }
 
-        public bool CheckValue(int i)
+        public bool CheckValue()
         {
-            if(arrBoard[i] == 'X' || arrBoard[i] == '0')
-            {
-                return true;
-            }
             return false;
         }
 
-        public bool CheckForDraw()
-        {
-            if (countPieces >= 8)
-            {
-                return false;
-            }
-            return true;
-        }
-        
         public bool CheckForWin()
         {
             //Just for the record.. i hate this bool.. 
             //Vandret 1
-            if(arrBoard[0] == arrBoard[1] && arrBoard[1] == arrBoard[2])
+            if (boardpieces[0] == boardpieces[1] && boardpieces[1] == boardpieces[2])
             {
                 return true;
             }
             //Vandret 2
-            if (arrBoard[3] == arrBoard[4] && arrBoard[4] == arrBoard[5])
+            if (boardpieces[3] == boardpieces[4] && boardpieces[4] == boardpieces[5])
             {
                 return true;
             }
             //Vandret 3
-            if (arrBoard[6] == arrBoard[7] && arrBoard[7] == arrBoard[8])
+            if (boardpieces[6] == boardpieces[7] && boardpieces[7] == boardpieces[8])
             {
                 return true;
             }
             //Skrå 1
-            if (arrBoard[0] == arrBoard[4] && arrBoard[4] == arrBoard[8])
+            if (boardpieces[0] == boardpieces[4] && boardpieces[4] == boardpieces[8])
             {
                 return true;
             }
             //Skrå 2
-            if (arrBoard[2] == arrBoard[4] && arrBoard[4] == arrBoard[6])
+            if (boardpieces[2] == boardpieces[4] && boardpieces[4] == boardpieces[6])
             {
                 return true;
             }
             //Horizontal 1
-            if (arrBoard[0] == arrBoard[3] && arrBoard[3] == arrBoard[6])
+            if (boardpieces[0] == boardpieces[3] && boardpieces[3] == boardpieces[6])
             {
                 return true;
             }
             //Horizontal 2
-            if (arrBoard[1] == arrBoard[4] && arrBoard[4] == arrBoard[7])
+            if (boardpieces[1] == boardpieces[4] && boardpieces[4] == boardpieces[7])
             {
                 return true;
             }
             //Horizontal 3
-            if (arrBoard[2] == arrBoard[5] && arrBoard[5] == arrBoard[8])
+            if (boardpieces[2] == boardpieces[5] && boardpieces[5] == boardpieces[8])
             {
                 return true;
             }
@@ -107,9 +103,9 @@ namespace _3PaaStribe
 
         public void ResetBoard()
         {
-            for (int i = 0; i < arrBoard.Length; i++)
+            for (int i = 0; i < boardpieces.Length; i++)
             {
-                arrBoard[i] = Convert.ToChar(i);
+                //boardpieces[i] = i;
             }
         }
     }
