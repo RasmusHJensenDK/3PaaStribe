@@ -31,11 +31,12 @@ namespace _3PaaStribe
             Console.WriteLine("  -------------------------");
         }
 
-        public void MovePiece(int move, Player player, Board board)
+        public void MovePiece(int move, Player player, Player second, Board board)
         {
             Console.Clear();
             arrBoard[move] = player.GetPlayerPiece();
-
+            player.playerTurn = !second.playerTurn;
+            second.playerTurn = !player.playerTurn;
             countPieces++;
             DrawBoard();
         }
