@@ -23,18 +23,19 @@ namespace _3PaaStribe
             do
             {
                 board.DrawBoard();
-
-                while (player.GetPlayerTurn())
+                if (bot.GetPlayerTurn())
                 {
                     Type(STRplayerone);
+
                     moveTo = Convert.ToInt32(Console.ReadLine());
 
                     while (board.CheckValue(moveTo))
                     {
+                        Type("Spot is taken...");
                         moveTo = Convert.ToInt32(Console.ReadLine());
                     }
 
-                    board.MovePiece(moveTo, player, board);
+                    board.MovePiece(moveTo, player, bot, board);
 
                     if (board.CheckForWin())
                     {
@@ -43,10 +44,9 @@ namespace _3PaaStribe
                         winningPlayer = player.GetPlayerName();
                         break;
                     }
-                    player.playerTurn = false;
                 }
 
-                while (!player.GetPlayerTurn())
+                if (!player.GetPlayerTurn())
                 {
                     Type("Bot is thinking...");
                     Thread.Sleep(400);
@@ -58,7 +58,7 @@ namespace _3PaaStribe
                     }
                     Type(moveTo.ToString());
 
-                    board.MovePiece(moveTo, bot, board);
+                    board.MovePiece(moveTo, bot, player, board);
 
                     if (board.CheckForWin())
                     {
@@ -68,7 +68,6 @@ namespace _3PaaStribe
                         break;
 
                     }
-                    player.playerTurn = true;
                 }
 
 

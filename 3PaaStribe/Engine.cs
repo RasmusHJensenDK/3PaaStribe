@@ -6,17 +6,14 @@ using System.Linq;
 
 namespace _3PaaStribe
 {
-    class Engine: Strings
+    class Engine: Multiplayer
     {
         //User input variables. Get rids of theese somehow..
         #region
-        static char botPiece;
         static char gameMode;
-        static char piece;
-        static char multiplayerPiece;
-        static char multiplayer2Piece;
+        static char piece = 'X';
         static bool finish = true;
-        private static char[] playerPieces = { 'X', 'O' };
+        static char multiplayerPiece;
         private static char[] gamemodes = { 'S', 'M' };
         #endregion
 
@@ -31,6 +28,7 @@ namespace _3PaaStribe
         {
             TypeMulti(ARRbuilderwelcome);
             Board board = new Board();
+            Player player = new Player("Player", 'X');
             gameMode = Console.ReadKey().KeyChar;
             Boolean gamemode = gamemodes.Contains(gameMode);
 
@@ -50,24 +48,16 @@ namespace _3PaaStribe
                     piece = Console.ReadKey().KeyChar;
                     Type("");
 
-                    Boolean exist = playerPieces.Contains(piece);
-                    while (!exist)
+                    while (!player.PlayerPieces(piece))
                     {
                         Type("Piece has to X or O");
                         Type("Remember the uppercase!!");
                         piece = Console.ReadKey().KeyChar;
-                        exist = playerPieces.Contains(piece);
                     }
 
-                    botPiece = CHRpieceX;
-                    Player singlePlayer = new Player(STRplayerone, Convert.ToInt32(piece));
+                    Player singlePlayer = new Player(STRplayerone, piece);
+                    Player bot = new Player(STRbot, singlePlayer.SetPiece());
 
-                    if (singlePlayer.GetPlayerPiece() == CHRpieceX)
-                    {
-                        botPiece = CHRpieceO;
-                    }
-
-                    Player bot = new Player(STRbot, botPiece);
                     SinglePlayer(singlePlayer, bot, board);
 
                     Type("Congratulations .name/ ");
@@ -78,21 +68,10 @@ namespace _3PaaStribe
                     TypeMulti(ARRwelcomemulti);
                     multiplayerPiece = Console.ReadKey().KeyChar;
                     Type("");
-                    Player playerone = new Player(STRplayerone, Convert.ToInt32(multiplayerPiece));
-
-                    if (multiplayerPiece == CHRpieceX)
-                    {
-                        multiplayer2Piece = CHRpieceO;
-                    }
-                    else
-                    {
-                        multiplayer2Piece = CHRpieceX;
-                    }
-
-                    Player playerTwo = new Player(STRplayertwo, multiplayer2Piece);
+                    Player playerone = new Player(STRplayerone, multiplayerPiece);
+                    Player playerTwo = new Player(STRplayertwo, playerone.SetPiece());
                     Multiplayer(playerone, playerTwo, board);
                     Console.Clear();
-                    Type("Congratulations .name/ ");
 
                     break;
             }
@@ -110,14 +89,13 @@ namespace _3PaaStribe
                 if (multiplayer.IsGameFinished())
                 {
                     multiplayer.SetGameFinish();
-                    finish = true;
-                    //Set winner instead of this..
-                    Type("The winner is .. " + multiplayer.WinningPlayer());
+                    finish = false;
+                    Type("Congratulations " + multiplayer.WinningPlayer());
                 }
             
             } while (!finish);
         }
-//Singleplayer start game
+        
         public static void SinglePlayer(Player player, Player bot, Board board)
         {
             Ai ai = new Ai();
@@ -128,10 +106,8 @@ namespace _3PaaStribe
                 if (ai.IsGameFinished())
                 {
                     ai.SetGameFinish();
-                    finish = true;
-
-                    //Set winner instead of this..
-                    Type("The winner is .. " + ai.WinningPlayer());
+                    finish = false;
+                    Type("Congratulations " + ai.WinningPlayer());
                 }
             } while (!finish);
         }

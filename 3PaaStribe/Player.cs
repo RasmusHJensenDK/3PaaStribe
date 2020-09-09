@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace _3PaaStribe
@@ -8,9 +9,12 @@ namespace _3PaaStribe
     {
         public bool playerTurn { get; set; }
         private string playerName { get; set; }
-        private int playerPiece { get; set; }
+        private char playerPiece { get; set; }
+        private char botPiece { get; set; }
 
-        public Player(string playerName, int playerPiece, bool playerTurn = false)
+        private static char[] playerPieces = { 'X', 'O' };
+
+        public Player(string playerName, char playerPiece, bool playerTurn = true)
         {
             this.playerName = playerName;
             this.playerTurn = playerTurn;
@@ -31,5 +35,33 @@ namespace _3PaaStribe
         {
             return playerPiece;
         }
+
+        public void SetPlayerPiece(char t)
+        {
+            this.playerPiece = playerPieces[t];
+        }
+
+        public char SetPiece()
+        {
+            if (GetPlayerPiece() == 'X')
+            {
+                botPiece = 'O';
+            }
+            else
+            {
+                botPiece = 'X';
+            }
+            return botPiece;
+        }
+
+        public bool PlayerPieces(char t)
+        {
+            if(playerPieces.Contains(t))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
