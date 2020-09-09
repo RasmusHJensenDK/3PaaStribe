@@ -8,20 +8,26 @@ namespace _3PaaStribe
     class Boardpiece
     {
         private string boardpieces { get; set; }
+        private int pieceNumber;
         public Boardpiece(Player player = null)
         {
             if (player == null)
             {
-                this.boardpieces = "E";
+                this.boardpieces = (pieceNumber).ToString();
             } else
             {
-                this.boardpieces = player.GetPlayerPiece().ToString();
+                this.boardpieces = player.GetPlayerPiece();
             }
         }
 
         public string GetBoardPiece()
         {
             return boardpieces;
+        }
+
+        public void SetPieceNumber(int i)
+        {
+            pieceNumber = i;
         }
         public int GetIndexOfNumerical(string index)
         {

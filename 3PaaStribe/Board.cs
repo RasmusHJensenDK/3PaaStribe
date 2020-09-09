@@ -20,7 +20,8 @@ namespace _3PaaStribe
             foreach (boardpieces bp in Enum.GetValues(typeof(boardpieces)))
             {
                 Boardpiece boardpiece = new Boardpiece();
-                boardpieces[taeller] = boardpiece;
+                boardpieces[taeller] = boardpiece; 
+                boardpiece.SetPieceNumber(taeller + 1);
                 taeller++;
             }
 
@@ -105,7 +106,8 @@ namespace _3PaaStribe
         {
             for (int i = 0; i < boardpieces.Length; i++)
             {
-                //boardpieces[i] = i;
+                Boardpiece boardpiece = new Boardpiece();
+                boardpieces[i] = boardpiece;
             }
         }
     }
