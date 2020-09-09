@@ -25,11 +25,11 @@ namespace _3PaaStribe
                 board.DrawBoard();
                 if (bot.GetPlayerTurn())
                 {
-                    Type(STRplayerone);
+                    Type(ReturnString(16));
 
                     moveTo = Convert.ToInt32(Console.ReadLine());
                     /*
-                    while (board.CheckValue(moveTo))
+                    while (board.CheckValue(player.GetPlayerPiece()))
                     {
                         Type("Spot is taken...");
                         moveTo = Convert.ToInt32(Console.ReadLine());
@@ -39,7 +39,7 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
-                        Type(player.GetPlayerName() + STRwin);
+                        Type(player.GetPlayerName() + ReturnString(7));
                         isGameFinished = true;
                         winningPlayer = player.GetPlayerName();
                         break;
@@ -52,7 +52,7 @@ namespace _3PaaStribe
                     Thread.Sleep(400);
                     moveTo = random.Next(1, 8);
                     /*
-                    while (board.CheckValue(moveTo))
+                    while (board.CheckValue())
                     {
                         Type("Bot chose a spot allready there.. thinking again..");
                         moveTo = random.Next(1, 8);
@@ -64,7 +64,7 @@ namespace _3PaaStribe
 
                     if (board.CheckForWin())
                     {
-                        Type(bot.GetPlayerName() + STRwin);
+                        Type(bot.GetPlayerName() + ReturnString(7));
                         isGameFinished = true;
                         winningPlayer = bot.GetPlayerName();
                         break;

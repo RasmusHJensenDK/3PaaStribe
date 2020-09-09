@@ -11,14 +11,16 @@ namespace _3PaaStribe
         private string playerName { get; set; }
         private string playerPiece { get; set; }
         private string botPiece { get; set; }
+        private ConsoleColor color { get; set; }
 
         private static string[] playerPieces = { "X", "O" };
 
-        public Player(string playerName, string playerPiece, bool playerTurn = true)
+        public Player(string playerName, string playerPiece, ConsoleColor color, bool playerTurn = true)
         {
             this.playerName = playerName;
             this.playerTurn = playerTurn;
             this.playerPiece = playerPiece;
+            this.color = color;
         }
 
         public string GetPlayerName()
@@ -31,6 +33,11 @@ namespace _3PaaStribe
             return playerTurn;
         }
 
+        public ConsoleColor GetConsoleColor()
+        {
+            return color;
+        }
+
         public string GetPlayerPiece()
         {
             return playerPiece;
@@ -41,7 +48,7 @@ namespace _3PaaStribe
             this.playerPiece = playerPieces[Convert.ToInt32(t)];
         }
 
-        public string SetPiece()
+        public string SetBotPiece()
         {
             if (GetPlayerPiece() == "X")
             {

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace _3PaaStribe
 {
 
-    public class Board
+    public class Board : Strings
     {
         private Boardpiece[] boardpieces;
-
         public Board()
         {
         }
@@ -19,9 +19,15 @@ namespace _3PaaStribe
 
             foreach (boardpieces bp in Enum.GetValues(typeof(boardpieces)))
             {
+                Player player = new Player("player1", "X", ConsoleColor.Blue);
                 Boardpiece boardpiece = new Boardpiece();
-                boardpieces[taeller] = boardpiece; 
-                boardpiece.SetPieceNumber(taeller + 1);
+                //Boardpiece is messed up.
+                boardpieces[taeller] = boardpiece;
+                boardpiece.SetPieceNumber((taeller + 1).ToString());
+
+                Type(boardpiece.GetBoardPiece());
+                Type(taeller.ToString());
+                Thread.Sleep(1000);
                 taeller++;
             }
 
@@ -45,14 +51,19 @@ namespace _3PaaStribe
         {
             Console.Clear();
             Boardpiece boardpiece = new Boardpiece(player);
+            //Boardpiece is messed up.
             boardpieces[move] = boardpiece;
             player.playerTurn = !second.playerTurn;
             second.playerTurn = !player.playerTurn;
             DrawBoard();
         }
 
-        public bool CheckValue()
+        public bool CheckValue(Boardpiece boardpiece)
         {
+            if (Enum.IsDefined(typeof(boardpieces), boardpiece))
+            {
+                return true;
+            }
             return false;
         }
 

@@ -22,7 +22,7 @@ namespace _3PaaStribe
                 //Player 1 turn
                 if (player.GetPlayerTurn())
                 {
-                    Type(STRplayerone);
+                    Type(ReturnString(16));
                     moveTo = Convert.ToInt32(Console.ReadLine());
                     board.MovePiece(moveTo, player, player2, board);
 
@@ -37,7 +37,7 @@ namespace _3PaaStribe
                 //Player 2 turn
                 if (player2.GetPlayerTurn())
                 {
-                    Type(STRplayertwo);
+                    Type(ReturnString(17));
                     moveTo = Convert.ToInt32(Console.ReadLine());
                     board.MovePiece(moveTo, player2, player, board);
 
